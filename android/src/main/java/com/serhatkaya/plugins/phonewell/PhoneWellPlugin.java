@@ -12,12 +12,10 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.annotation.Permission;
 import org.json.JSONException;
 
-@CapacitorPlugin(
-    name = "PhoneWell",
-    permissions = {
-        @Permission(alias = "phone_calls", strings = { Manifest.permission.READ_PHONE_STATE, Manifest.permission.PROCESS_OUTGOING_CALLS })
-    }
-)
+@CapacitorPlugin(name = "PhoneWell", permissions = {
+        @Permission(alias = "phone_calls", strings = { Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.PROCESS_OUTGOING_CALLS })
+})
 public class PhoneWellPlugin extends Plugin {
 
     private PhoneWell implementation;

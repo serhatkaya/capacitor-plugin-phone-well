@@ -1,6 +1,6 @@
 {
   "name": "capacitor-plugin-phone-well",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "PhoneWell is capacitor plugin for utilizing phone calls.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
