@@ -69,13 +69,4 @@ public class PhoneWellPlugin extends Plugin {
     protected void handleOnDestroy() {
         implementation.setCallStateChangeListener(null);
     }
-
-    @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
-
-        JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
-        call.resolve(ret);
-    }
 }
