@@ -7,4 +7,11 @@ export class PhoneWellWeb extends WebPlugin implements PhoneWellPlugin {
     console.log('ECHO', options);
     return options;
   }
+
+  async detectCallState(options: {
+    action: string;
+  }): Promise<{ action: string }> {
+    console.log('Web is not supported.', options);
+    return options;
+  }
 }
