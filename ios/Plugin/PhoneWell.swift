@@ -5,4 +5,8 @@ import Foundation
         print(value)
         return value
     }
+
+    @objc public func start(_ value: String) -> String {
+        return value
+    }
 }

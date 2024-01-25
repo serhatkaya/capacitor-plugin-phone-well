@@ -70,4 +70,17 @@ public class PhoneWellPlugin: CAPPlugin, CXCallObserverDelegate {
             ])
         }
     }
+
+    @objc func start(_ call: CAPPluginCall) {
+        let phoneNumber = call.getString("phone") ?? ""
+        let phoneUrlStr = "tel://" + phoneNumber
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(URL(string: phoneUrlStr)!, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(URL(string: phoneUrlStr)!)
+        }
+        call.resolve([
+            "msg": "成功",
+        ])
+    }
 }

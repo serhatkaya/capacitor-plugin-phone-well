@@ -16,6 +16,7 @@ npx cap sync
 * [`echo(...)`](#echo)
 * [`detectCallState(...)`](#detectcallstate)
 * [`addListener('callStateChange', ...)`](#addlistenercallstatechange)
+* [`start(...)`](#start)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 
@@ -73,6 +74,21 @@ addListener(eventName: 'callStateChange', listenerFunc: CallStateChangeListener)
 --------------------
 
 
+### start(...)
+
+```typescript
+start(options: PhoneCallOptions) => Promise<SucessCallBack>
+```
+
+| Param         | Type                                                          |
+| ------------- | ------------------------------------------------------------- |
+| **`options`** | <code><a href="#phonecalloptions">PhoneCallOptions</a></code> |
+
+**Returns:** <code>Promise&lt;<a href="#sucesscallback">SucessCallBack</a>&gt;</code>
+
+--------------------
+
+
 ### Interfaces
 
 
@@ -91,6 +107,20 @@ addListener(eventName: 'callStateChange', listenerFunc: CallStateChangeListener)
 | **`callState`**      | <code><a href="#phonestatetype">PhoneStateType</a></code> | The type of call. 'RINGING' \| 'OUTGOING' \| 'IDLE' \| 'ON_CALL' \| 'ON_HOLD' | 1.0.0 |
 | **`incomingNumber`** | <code>string</code>                                       |                                                                               |       |
 | **`outgoingNumber`** | <code>string</code>                                       |                                                                               |       |
+
+
+#### SucessCallBack
+
+| Prop      | Type                |
+| --------- | ------------------- |
+| **`msg`** | <code>string</code> |
+
+
+#### PhoneCallOptions
+
+| Prop        | Type                |
+| ----------- | ------------------- |
+| **`phone`** | <code>string</code> |
 
 
 ### Type Aliases

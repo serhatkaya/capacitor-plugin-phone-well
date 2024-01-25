@@ -12,6 +12,7 @@ export interface PhoneWellPlugin {
     eventName: 'callStateChange',
     listenerFunc: CallStateChangeListener,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  start(options: PhoneCallOptions): Promise<SucessCallBack>;
 }
 
 export interface PhoneState {
@@ -44,3 +45,10 @@ export type PhoneStateType =
   | 'ON_HOLD';
 
 export type CallStateChangeListener = (status: PhoneState) => void;
+
+export interface PhoneCallOptions {
+  phone: string;
+}
+export interface SucessCallBack {
+  msg: string;
+}

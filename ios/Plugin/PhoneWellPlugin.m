@@ -6,4 +6,5 @@
 CAP_PLUGIN(PhoneWellPlugin, "PhoneWell",
            CAP_PLUGIN_METHOD(echo, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(detectCallState, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(start, CAPPluginReturnPromise);
 )

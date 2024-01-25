@@ -1,6 +1,8 @@
 package com.serhatkaya.plugins.phonewell;
 
 import android.Manifest;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -18,8 +20,13 @@ import org.json.JSONException;
 )
 public class PhoneWellPlugin extends Plugin {
 
-    private PhoneWell implementation = new PhoneWell();
+    private PhoneWell implementation;
     public static final String CALL_STATE_EVENT = "callStateChange";
+
+    @Override
+    public void load() {
+        implementation = new PhoneWell(getContext());
+    }
 
     @PluginMethod
     public void echo(PluginCall call) {
@@ -68,5 +75,17 @@ public class PhoneWellPlugin extends Plugin {
     @Override
     protected void handleOnDestroy() {
         implementation.setCallStateChangeListener(null);
+    }
+
+    @PluginMethod
+    public void start(PluginCall call) {
+        String value = call.getString("phone");
+
+        Uri uri = Uri.parse("tel:" + value);
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(uri);
+        getActivity().startActivity(intent);
+
+        call.resolve();
     }
 }
