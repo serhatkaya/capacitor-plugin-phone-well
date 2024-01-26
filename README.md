@@ -56,12 +56,12 @@ PhoneWell.start({ phone: '+905555555' });
 
 <docgen-index>
 
-- [`echo(...)`](#echo)
-- [`detectCallState(...)`](#detectcallstate)
-- [`addListener('callStateChange', ...)`](#addlistenercallstatechange)
-- [`start(...)`](#start)
-- [Interfaces](#interfaces)
-- [Type Aliases](#type-aliases)
+* [`echo(...)`](#echo)
+* [`detectCallState(...)`](#detectcallstate)
+* [`addListener('callStateChange', ...)`](#addlistenercallstatechange)
+* [`start(...)`](#start)
+* [Interfaces](#interfaces)
+* [Type Aliases](#type-aliases)
 
 </docgen-index>
 
@@ -80,7 +80,8 @@ echo(options: { value: string; }) => Promise<{ value: string; }>
 
 **Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
 
----
+--------------------
+
 
 ### detectCallState(...)
 
@@ -97,7 +98,8 @@ options: { action: 'ACTIVATE' | 'DEACTIVATE' }
 
 **Returns:** <code>Promise&lt;{ action: string; }&gt;</code>
 
----
+--------------------
+
 
 ### addListener('callStateChange', ...)
 
@@ -112,7 +114,8 @@ addListener(eventName: 'callStateChange', listenerFunc: CallStateChangeListener)
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
----
+--------------------
+
 
 ### start(...)
 
@@ -126,15 +129,18 @@ start(options: PhoneCallOptions) => Promise<SucessCallBack>
 
 **Returns:** <code>Promise&lt;<a href="#sucesscallback">SucessCallBack</a>&gt;</code>
 
----
+--------------------
+
 
 ### Interfaces
+
 
 #### PluginListenerHandle
 
 | Prop         | Type                                      |
 | ------------ | ----------------------------------------- |
 | **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
+
 
 #### PhoneState
 
@@ -145,11 +151,13 @@ start(options: PhoneCallOptions) => Promise<SucessCallBack>
 | **`incomingNumber`** | <code>string</code>                                       |                                                                               |       |
 | **`outgoingNumber`** | <code>string</code>                                       |                                                                               |       |
 
+
 #### SucessCallBack
 
 | Prop      | Type                |
 | --------- | ------------------- |
 | **`msg`** | <code>string</code> |
+
 
 #### PhoneCallOptions
 
@@ -157,11 +165,14 @@ start(options: PhoneCallOptions) => Promise<SucessCallBack>
 | ----------- | ------------------- |
 | **`phone`** | <code>string</code> |
 
+
 ### Type Aliases
+
 
 #### CallStateChangeListener
 
 <code>(status: <a href="#phonestate">PhoneState</a>): void</code>
+
 
 #### PhoneStateType
 

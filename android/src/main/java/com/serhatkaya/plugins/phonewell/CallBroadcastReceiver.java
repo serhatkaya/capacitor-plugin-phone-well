@@ -18,21 +18,26 @@ public class CallBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i("CallBroadcastReceiver", intent.getAction());
-        if (intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
-            currentPhoneState.setCallActive(true);
-            currentPhoneState.setCallState("OUTGOING_CALL");
-        } else {
+
+        // Handle phone state changed
+        if (intent.getAction().equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
             TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(context,
+                    Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
             int callState = tm.getCallState();
-            if (callState == this.prevState) {
+            if (callState == this.prevState && callState != TelephonyManager.CALL_STATE_RINGING) {
+                return;
+            }
+
+            String callerNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+            if (callState == TelephonyManager.CALL_STATE_RINGING && callerNumber == null) {
                 return;
             }
             checkPhoneState(callState, intent);
+            callStateChangeListener.onCallStateChanged();
         }
-        callStateChangeListener.onCallStateChanged();
     }
 
     private void checkPhoneState(int state, Intent intent) {
@@ -42,18 +47,18 @@ public class CallBroadcastReceiver extends BroadcastReceiver {
                 this.currentPhoneState.setCallState("IDLE");
                 break;
             case TelephonyManager.CALL_STATE_RINGING:
-                // called when someone is ringing to this phone
                 this.currentPhoneState.setCallActive(true);
                 this.currentPhoneState.setCallState("RINGING");
-                this.currentPhoneState.setIncomingNumber(intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER));
+                String incomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+                if (incomingNumber != null) {
+                    this.currentPhoneState.setIncomingNumber(incomingNumber);
+                }
                 break;
             case TelephonyManager.CALL_STATE_OFFHOOK:
-                // If call was picked
                 if (prevState == TelephonyManager.CALL_STATE_RINGING) {
                     this.currentPhoneState.setCallActive(true);
                     this.currentPhoneState.setCallState("ON_CALL");
                 } else {
-                    // TODO: Not sure if this is correct.
                     this.currentPhoneState.setCallActive(false);
                     this.currentPhoneState.setCallState("ON_HOLD");
                 }
